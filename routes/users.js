@@ -102,4 +102,28 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
+/**
+ * API to get user details in app.
+ * @param req {objects}
+ * @param res {objects}
+ */
+router.get('/:id', async (req, res) => {
+    const {
+        params: {
+            id
+        }
+    } = req;
+
+    try {
+        const user = await User.findById(id);
+        if(user) {
+            const cloneUser  = {...user?._doc};
+            delete cloneUser.password;
+            setSuccessResponse({ user: cloneUser }, res);
+        }
+    }catch (err) {
+        setErrorResponse(err, ERROR.GETTING_DATA, res);
+    }
+})
+
 module.exports = router;
