@@ -3,6 +3,7 @@ const app = express();
 const dotEnv = require("dotenv");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
+const userRoute = require("./routes/users")
 const cors = require("cors");
 
 dotEnv.config();
@@ -18,6 +19,7 @@ mongoose
     .catch((err) => console.log(err));
 
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
 
 app.listen("5000", () => {
     console.log("App is running on 5000 port")

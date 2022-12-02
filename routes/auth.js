@@ -5,7 +5,11 @@ const {isEmptyOrNull, isNotEmail} = require(`../helpers/validation`);
 const {setErrorResponse, setSuccessResponse} = require("../services/api-handler");
 const ERROR = require(`../handlers/error-keys`);
 
-//REGISTER
+/**
+ * API to sign up of user to app.
+ * @param req {objects}
+ * @param res {objects}
+ */
 router.post('/register', async (req, res) => {
     const {
         body: {
@@ -39,7 +43,11 @@ router.post('/register', async (req, res) => {
     }
 })
 
-//LOGIN
+/**
+ * API to sign up of user to app.
+ * @param req {objects}
+ * @param res {objects}
+ */
 router.post('/login', async (req, res) => {
     const {
         body: {
@@ -47,12 +55,20 @@ router.post('/login', async (req, res) => {
             password
         }
     } = req;
+    if (isEmptyOrNull(email) || isEmptyOrNull(password)) {
+        setErrorResponse(null, ERROR?.REQUIRED_FIELDS_MISSING, res);
+        return;
+    }
     try {
         const user = await User.findOne({email});
         !user && setErrorResponse(null, ERROR.LOGIN_FAILED, res);
-        const validated = await bcrypt.compare(password, user.password);
-        !validated && setErrorResponse(null, ERROR.LOGIN_FAILED, res);
-        setSuccessResponse({ user }, res);
+        if(user && user["password"] && password) {
+            const validated = await bcrypt.compareSync(password, user?.["password"]);
+            !validated && setErrorResponse(null, ERROR.LOGIN_FAILED, res);
+            const cloneUser  = {...user?._doc};
+            delete cloneUser.password;
+            setSuccessResponse({ user: cloneUser }, res);
+        }
     }catch (err) {
         setErrorResponse(err, ERROR.GETTING_DATA, res);
     }
