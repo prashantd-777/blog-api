@@ -5,10 +5,15 @@ const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users")
 const cors = require("cors");
+const bodyParser = require('body-parser');
 
 dotEnv.config();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
+
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 mongoose
     ?.connect(process.env.MONGO_URL, {
