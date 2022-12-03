@@ -43,5 +43,9 @@ module.exports = {
     REMOVING_DATA: `Error while removing data`,
     UNKNOWN_ERROR: `Database error is occur or something went wrong`,
     UNAUTHORIZED: `Authentication failed`,
-    NOT_FOUND: `Page not found`,
+    NOT_FOUND: `Not found`,
+    POST_NOT_FOUND: `Post not found`,
+    UNAUTHORIZED_POST_ERROR: `This post may be already deleted or you don't have access for it`,
+    POST_ALREADY_PRESENT: `Post is already present`,
+    POST_DELETED: `Post has been deleted`,
 }

@@ -3,13 +3,15 @@ const app = express();
 const dotEnv = require("dotenv");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
-const userRoute = require("./routes/users")
+const usersRoute = require("./routes/users")
+const postsRoute = require("./routes/posts")
 const cors = require("cors");
 const bodyParser = require('body-parser');
 
 dotEnv.config();
 app.use(express.json());
 app.use(cors());
+
 
 // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,7 +26,8 @@ mongoose
     .catch((err) => console.log(err));
 
 app.use("/api/auth", authRoute);
-app.use("/api/users", userRoute);
+app.use("/api/users", usersRoute);
+app.use("/api/posts", postsRoute);
 
 app.listen("5000", () => {
     console.log("App is running on 5000 port")

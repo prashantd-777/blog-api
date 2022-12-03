@@ -44,6 +44,9 @@ module.exports = {
     UNKNOWN_ERROR: -522,
     UNAUTHORIZED: 401,
     NOT_FOUND: 404,
+    POST_NOT_FOUND: -301,
+    UNAUTHORIZED_POST_ERROR: -302,
+    POST_ALREADY_PRESENT: -303,
 
     //No mapping message
     HTTP_SUCCESS: 200,
