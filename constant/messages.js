@@ -48,4 +48,5 @@ module.exports = {
     UNAUTHORIZED_POST_ERROR: `This post may be already deleted or you don't have access for it`,
     POST_ALREADY_PRESENT: `Post is already present`,
     POST_DELETED: `Post has been deleted`,
+    CATEGORY_ALREADY_PRESENT: `Category is already present`,
 }
