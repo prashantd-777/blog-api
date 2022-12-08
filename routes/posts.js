@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {setErrorResponse, setSuccessResponse} = require("../services/api-handler");
 const Post = require("../models/Post");
 const ERROR = require(`../handlers/error-keys`);
+const {isEmptyOrNull, isInValidCharLength} = require(`../helpers/validation`);
 
 /**
  * API to create posts in app.
@@ -9,7 +10,18 @@ const ERROR = require(`../handlers/error-keys`);
  * @param res {objects}
  */
 router.post('/', async (req, res) => {
-    const {body: {title}} = req;
+    const {body: {title, desc}} = req;
+
+    if(isEmptyOrNull(title)) {
+        setErrorResponse(null, ERROR.REQUIRED_FIELDS_MISSING, res);
+        return;
+    }
+
+    if(isInValidCharLength(desc, 100)) {
+        setErrorResponse(null, ERROR.DESC_CHARS_LIMIT, res);
+        return;
+    }
+
     const exPost = await Post.findOne({title});
     if(exPost) {
         setErrorResponse(null, ERROR.POST_ALREADY_PRESENT, res);
@@ -127,7 +139,6 @@ router.get('/', async (req, res) => {
         } else {
             posts = await Post.find();
         }
-
         setSuccessResponse({ posts }, res);
     }catch (err) {
         setErrorResponse(err, ERROR.GETTING_DATA, res);

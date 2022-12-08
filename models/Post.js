@@ -12,11 +12,17 @@ const PostSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        required: false
+        required: false,
+        default: ""
     },
     username: {
         type: String,
         required: true
+    },
+    count: {
+        type: Number,
+        required: false,
+        default: 0
     },
     categories: {
         type: Array,

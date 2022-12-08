@@ -35,7 +35,9 @@ module.exports = {
     },
     setSuccessResponse: (data, res) => {
         return res.status(ErrorCode["HTTP_SUCCESS"]).send({
-            data: data
+            data: data,
+            success: true,
+            version: "v1"
         });
     },
 };

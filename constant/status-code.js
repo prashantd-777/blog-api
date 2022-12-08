@@ -48,6 +48,7 @@ module.exports = {
     UNAUTHORIZED_POST_ERROR: -302,
     POST_ALREADY_PRESENT: -303,
     CATEGORY_ALREADY_PRESENT: -304,
+    DESC_CHARS_LIMIT: -305,
 
     //No mapping message
     HTTP_SUCCESS: 200,

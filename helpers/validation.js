@@ -9,5 +9,6 @@ module.exports = {
 
     isNotMongoId: id => !(id && validator?.isMongoId(id)),
 
-    isPositiveInteger: number => number && parseInt(number) && number > 0
+    isPositiveInteger: number => number && parseInt(number) && number > 0,
+    isInValidCharLength: (str, number = 0) => (str && str.length <= number)
 };

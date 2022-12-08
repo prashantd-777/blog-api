@@ -49,4 +49,5 @@ module.exports = {
     POST_ALREADY_PRESENT: `Post is already present`,
     POST_DELETED: `Post has been deleted`,
     CATEGORY_ALREADY_PRESENT: `Category is already present`,
+    DESC_CHARS_LIMIT: `Description must be at least 100 characters required`,
 }
